@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bancada de Estruturas de Dados — AED / IFSC</title>
+<style>
+:root{
+  --ink:#FFFFFF; --panel:#F1F6EE; --clay:#5F973C; --data:#2C6E63; --alert:#B23A2E;
+  --bg:#132018; --bg2:#1B2B21; --muted:#B9C9BC; --line:rgba(255,255,255,.14);
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:"Segoe UI",system-ui,-apple-system,Arial,sans-serif; line-height:1.5;
+}
+.brand{height:6px;background:linear-gradient(90deg,var(--clay) 0 55%,var(--data) 55% 100%)}
+.wrap{max-width:1080px;margin:0 auto;padding:32px 24px 80px}
+header h1{font-size:2.4rem;line-height:1.1;margin:0 0 8px;font-weight:800}
+.eyebrow{font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;color:var(--clay);font-weight:700}
+.lede{color:var(--muted);max-width:66ch;margin:12px 0 0}
+.ctrl{
+  background:var(--bg2);border:1px solid var(--line);border-radius:8px;
+  padding:20px 22px;margin:28px 0 8px;display:grid;grid-template-columns:1fr auto;gap:20px;align-items:end;
+}
+.ctrl label{display:block;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--clay);font-weight:700;margin-bottom:10px}
+input[type=range]{width:100%;accent-color:var(--clay)}
+.nval{font-family:"Consolas",monospace;font-size:1.5rem;font-weight:700}
+button{
+  font:inherit;font-weight:700;cursor:pointer;border-radius:6px;border:1px solid var(--clay);
+  background:var(--clay);color:#0E1A12;padding:11px 20px;
+}
+button.ghost{background:transparent;color:var(--clay)}
+button:disabled{opacity:.45;cursor:progress}
+button:focus-visible{outline:3px solid #9FE08A;outline-offset:2px}
+.aviso{
+  border-left:4px solid var(--alert);background:rgba(178,58,46,.12);
+  padding:12px 16px;border-radius:0 6px 6px 0;color:var(--muted);font-size:.95rem;margin:14px 0 30px;
+}
+.exp{background:var(--bg2);border:1px solid var(--line);border-radius:8px;padding:22px 24px;margin-bottom:20px}
+.exp h2{font-size:1.4rem;margin:0 0 4px}
+.exp .q{color:var(--muted);margin:0 0 16px;font-size:1rem}
+.exp .top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+.bars{margin:14px 0 6px}
+.row{display:grid;grid-template-columns:200px 1fr 130px;gap:12px;align-items:center;margin:9px 0}
+.row .nm{font-size:.98rem}
+.row .nm small{display:block;color:var(--muted);font-family:"Consolas",monospace;font-size:.78rem}
+.track{background:rgba(255,255,255,.07);border-radius:4px;height:26px;overflow:hidden}
+.fill{height:100%;width:0;border-radius:4px;transition:width .5s ease}
+.fill.clay{background:var(--clay)} .fill.data{background:var(--data)} .fill.alert{background:var(--alert)}
+.ms{font-family:"Consolas",monospace;text-align:right;font-size:1rem}
+.ms b{font-size:1.15rem}
+.verdito{border-top:1px solid var(--line);margin-top:14px;padding-top:14px;color:var(--muted);font-size:.95rem}
+.verdito b{color:var(--panel)}
+.badge{display:inline-block;font-family:"Consolas",monospace;font-size:.8rem;background:rgba(95,151,60,.2);
+  color:#9FE08A;padding:3px 9px;border-radius:99px;margin-left:8px}
+.curva{background:var(--bg2);border:1px solid var(--line);border-radius:8px;padding:22px 24px;margin:34px 0 0}
+select{font:inherit;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:9px 12px}
+svg{width:100%;height:auto;display:block;margin-top:16px}
+.leg{display:flex;gap:18px;flex-wrap:wrap;margin-top:12px;font-size:.9rem;color:var(--muted)}
+.leg i{display:inline-block;width:14px;height:3px;vertical-align:middle;margin-right:7px}
+footer{color:rgba(255,255,255,.35);font-size:.85rem;margin-top:44px;border-top:1px solid var(--line);padding-top:18px}
+@media (max-width:720px){
+  .ctrl{grid-template-columns:1fr}
+  .row{grid-template-columns:1fr;gap:4px}
+  .ms{text-align:left}
+  header h1{font-size:1.7rem}
+}
+@media (prefers-reduced-motion:reduce){ .fill{transition:none} }
+</style>
+</head>
+<body>
+<div class="brand"></div>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Algoritmos e Estruturas de Dados · IFSC Câmpus Gaspar</div>
+  <h1>Bancada de estruturas de dados</h1>
+  <p class="lede">Cada teste roda de verdade na sua máquina, agora, e cronometra o tempo real. Nada é simulado.
+  Escolha o tamanho da coleção, rode e observe: a estrutura que vence um teste costuma perder o seguinte.</p>
+</header>
+
+<div class="ctrl">
+  <div>
+    <label for="n">Tamanho da coleção (N)</label>
+    <input type="range" id="n" min="5000" max="200000" step="5000" value="50000">
+    <div class="nval" id="nval">50.000 elementos</div>
+  </div>
+  <div style="display:flex;gap:10px;flex-wrap:wrap">
+    <button id="tudo">Rodar todos os testes</button>
+    <button id="limpar" class="ghost">Limpar</button>
+  </div>
+</div>
+
+<div class="aviso" id="aviso">
+  A página congela enquanto um teste roda — é o mesmo processo executando o laço. Com N acima de 100.000,
+  os testes de <b>unshift</b> e <b>shift</b> podem levar vários segundos. Feche outras abas pesadas antes de medir.
+</div>
+
+<div id="exps"></div>
+
+<section class="curva">
+  <h2 style="margin:0 0 6px;font-size:1.4rem">Curva de crescimento</h2>
+  <p class="q" style="color:var(--muted);margin:0 0 16px">
+    O mesmo teste repetido em quatro tamanhos. O que interessa aqui não é a altura da linha — é o
+    <b>formato</b> dela. Reta horizontal é O(1). Reta inclinada é O(n). Curva que sobe cada vez mais rápido é O(n²).</p>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+    <select id="expCurva"></select>
+    <button id="rodarCurva">Traçar curva</button>
+  </div>
+  <div id="graf"></div>
+  <div class="leg" id="leg"></div>
+</section>
+
+<footer>
+  Prof. Timóteo Monteiro da Silva · Análise e Desenvolvimento de Sistemas · Aula 2 — Lista Encadeada.<br>
+  Os tempos variam conforme máquina, navegador e carga do sistema. Rode duas ou três vezes: o que se repete é a
+  proporção entre as estruturas, não o número absoluto.
+</footer>
+</div>
+
+<script>
